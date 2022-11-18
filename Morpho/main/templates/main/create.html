@@ -1,0 +1,90 @@
+{% extends 'main/base.html'%}
+
+{% block title %} Create {% endblock %}
+
+{% block content %}
+
+<div class="d-flex flex-row justify-content-center mt-3">
+
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Idea</h5>
+          <p class="card-text">For those quick ideas you need to jot down</p>
+          <a href="{% url 'Write' 1  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Themes</h5>
+          <p class="card-text">The underlying point of what your working on. 
+            What are you really trying to say to the audience?</p>
+          <a href="{% url 'Write' 2  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Chapter</h5>
+          <p class="card-text">A single, contained event or events, 
+            meant to go along with others to form a complete story</p>
+          <a href="{% url 'Write' 3  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+</div>
+      <div class="d-flex flex-row justify-content-center">
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Character</h5>
+          <p class="card-text">Hero? Villain? Something in between? 
+            Or maybe something entirely different? Bring them to life here </p>
+          <a href="{% url 'Write' 4  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Poem</h5>
+          <p class="card-text">Feeling the rhythym? Write it here</p>
+          <a href="{% url 'Write' 5  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card mx-3 w-25">
+        <div class="card-body my-2">
+          <h5 class="card-title">Book</h5>
+          <p class="card-text">Meant to be a collection of chapters and events,
+             but it can be whatever you imagine</p>
+          <a href="{% url 'Write' 6  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      </div>
+      <div class="d-flex flex-row justify-content-center">
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Series</h5>
+          <p class="card-text">Many books or poems collected together in an order of your choosing</p>
+          <a href="{% url 'Write' 7  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Anthology</h5>
+          <p class="card-text">A collection of chapters, books, and/or series which may be connected by one theme or plot</p>
+          <a href="{% url 'Write' 8  %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+      <div class="card mx-3 w-25 my-2">
+        <div class="card-body">
+          <h5 class="card-title">Media</h5>
+          <p class="card-text">Pictures, Songs, and Playlists to enhance what you're thinking of</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+
+  </div>
+
+{% endblock %}
