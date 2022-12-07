@@ -3,5 +3,35 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}  
-    <p class="display-2">Hello!</p>
+<div class="mt-4" > 
+    <p class="morpho-guide-txt display-4">Welcome!, {{request.user.username}}</p>
+    <p class="morpho-guide-txt h4">Your recent creations:</p> 
+    
+    <div class="my-5">
+        <div class="d-flex flex-row mt-3"> 
+        {% for i  in recent %}
+        <div class=" mx-3 my-2 card"> 
+            <a href="{% url 'ViewCreation' type=i.2 id=i.3%}" class="card-block stretched-link text-decoration-none morpho-btn">
+            <div class="card-body">
+              <h5 class="card-title">{{i.0}}</h5>
+              <hr style=" border-top: 2px dashed black;">
+              <p class="card-text">Updated {{i.1}}</p>
+               
+                </div></a>
+           </div>
+
+        {% empty %}
+        <p class="morpho-guide-txt h4">
+            No Creations to show!
+            </p>
+        {% endfor %}
+        </div>
+    </div>
+    <div>
+        <p class="morpho-guide-txt h4">Click <span style="color: white;">  CREATE</span> to make another creation of your choosing</p>
+        <p class="morpho-guide-txt h4">Or, click <span style="color: white;">  VIEW</span>  to look at what you've made so far</p>
+        <p class="morpho-guide-txt h4">Additionally, Go to <span style="color: white;">  COMPILE</span>  to organize your creations</p>
+    </div>
+
+</div>
 {% endblock %}

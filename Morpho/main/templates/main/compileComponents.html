@@ -23,8 +23,12 @@ function rotateOnClick(pass_id){
 {% endblock %}
 
 {% block content %}  
+<form method="POST" >
+    {% csrf_token %}
+
 <div class="mx-4 my-4">
-    <p class="display-4">Your Library</p>
+    <p class="display-4" style="display: inline;">Choose a Container</p>
+    <button type="submit" class="mx-auto btn morpho-btn float-right" style="display: inline;">Submit</button>
 </div>
 
 <div class="mx-4">
@@ -38,13 +42,12 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
         {% for i in creations.ideas %}
         <div class=" mx-3 my-2 card"> 
-            <a href="{% url 'ViewCreation' type='Idea' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-            <div class="card-body">
+            <div class="card-body morpho-btn">
               <h5 class="card-title">{{i.name}}</h5>
               <hr style=" border-top: 2px dashed black;">
               <p class="card-text">Updated {{i.last_modified}}</p>
-              <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                </div></a>
+              <input class="float-right" type="checkbox" name="Ideas" value="{{i.id}}">
+                </div>
            </div>
         {% empty %}
            <p>Nothing Yet!</p>
@@ -65,13 +68,11 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.themes %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Theme' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Themes" value="{{i.id}}">   </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -91,13 +92,12 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.chapters %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Chapter' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Chapters" value="{{i.id}}">
+                    </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -117,13 +117,11 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.characters %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Character' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                 <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Characters" value="{{i.id}}">   </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -143,13 +141,11 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.poems %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Poem' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Poems" value="{{i.id}}">  </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -169,13 +165,12 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.books %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Book' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                 <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Books" value="{{i.id}}">
+                    </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -195,13 +190,12 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.series %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Series' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Series" value="{{i.id}}">
+                    </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -221,13 +215,12 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.anthologies %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Anthology' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                  <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Anthologies" value="{{i.id}}">
+                    </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -247,13 +240,12 @@ function rotateOnClick(pass_id){
         <div class="d-flex flex-row mt-3"> 
             {% for i in creations.media %}
             <div class=" mx-3 my-2 card"> 
-                <a href="{% url 'ViewCreation' type='Media' id=i.id%}" class="card-block stretched-link text-decoration-none morpho-btn">
-                <div class="card-body">
+                 <div class="card-body morpho-btn">
                   <h5 class="card-title">{{i.name}}</h5>
                   <hr style=" border-top: 2px dashed black;">
                   <p class="card-text">Updated {{i.last_modified}}</p>
-                  <p class="card-text float-right pb-2">Click to {% bs_icon 'eye-fill' %} view</p>
-                    </div></a>
+                  <input class="float-right" type="checkbox" name="Media" value="{{i.id}}">
+                    </div>
                </div>
                {% empty %}
             <p>Nothing Yet!</p>
@@ -265,4 +257,5 @@ function rotateOnClick(pass_id){
 <div class="mx-4">
 
 </div>
+</form>
 {% endblock %}

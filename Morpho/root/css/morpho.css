@@ -1,0 +1,54 @@
+.morpho-bg{
+
+    background-color:#5A464B;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:white;
+}
+
+.morpho-nav{
+    background-color: black;
+    color: white;
+}
+
+.morpho-login-bg{
+    background-image: url("/static/images/morphoIcon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70% auto;
+    height: 100vh;
+}
+
+.morpho-circle-login{
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #006484;
+    border-width: thin;
+    width: 500px;
+    height: 500px;
+}
+
+.morpho-login-title{
+    color: #5F9BEB;
+}
+
+.morpho-btn {
+    background-color: #78C8FF;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.morpho-guide-txt{
+    color: #5F9BEB;
+}
+
+.morpho-underscore{
+    border-top: 5px solid #6B829B;
+}
+
+.morpho-sameline{
+    display: inline-block;
+}
+
+.morpho-link{
+    text-decoration: none;
+}

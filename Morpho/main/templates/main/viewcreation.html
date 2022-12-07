@@ -1,0 +1,241 @@
+{% extends 'main/base.html'%}
+{%load bootstrap_icons%}
+{% block title %} View {% endblock %}
+
+{% block scripts %}
+<script type="text/javascript"> 
+
+var rotateDict = {}
+
+function rotateOnClick(pass_id){
+    if(rotateDict[pass_id] == null || rotateDict[pass_id] == false){
+        rotateDict[pass_id] = true;
+        document.getElementById(pass_id).style.transform = 'rotate(180deg)';
+        var elem = document.getElementById("Foot")
+        elem.classList.toggle("footer")
+    }
+    else{
+        rotateDict[pass_id] = false;
+        document.getElementById(pass_id).style.transform = 'rotate(0deg)';
+        var elem = document.getElementById("Foot")
+        elem.classList.toggle("footer")
+    }
+    document.getElementById("defaultOpen").click();
+}
+
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="mx-4 my-3"> 
+    <p class="display-4">{{creation.name}}</p>
+    <p class="h6"><span class="morpho-guide-txt"> Updated:</span> {{creation.last_modified}}</p>
+
+    <hr style=" border-top: 1px dashed #78C8FF;">
+
+    <div> 
+    {% if creation.expected_works%}
+    <div>
+    <p class="h6">Expected Connected Works: {{creation.expected_works}}</p>
+    </div>
+    {% endif %}
+    {% if creation.genre%}
+    <div> 
+    <p class="h6"><span class="morpho-guide-txt w-25"> Genre:</span>  {{creation.genre}} </p>
+    </div>
+    {% endif %}
+    {% if creation.driver%}
+    <div> 
+    <p class="h6"><span class="morpho-guide-txt">  What Drives this story: </span>{{creation.driver}}</p>
+    </div>
+    <hr style=" border-top: 1px dashed #78C8FF;">
+    {% endif %}
+
+    
+
+    {% if creation.premise%}
+    <div> 
+    <p class="h5"><span class="morpho-guide-txt">Premise: </span> </p>
+    <p>{{creation.premise}}</p>
+    </div>
+    {% endif %}
+    {% if creation.contents %}
+    <div> 
+    <p>{{creation.contents}}</p>
+    </div>
+    {% endif %}
+    
+    {% if creation.media_type%}
+    <div class="d-flex justify-content-center"> 
+        <div> 
+        {% if creation.media_type == 1 %}
+            {% if creation.yt_link %}
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{creation.media_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% else %}
+            <a href="{{creation.url}}" class="morpho-link h6">Click Here to view Media!</a>
+            {% endif %}
+        {% else %}
+            <img src="{{creation.url}}" alt="User Uploaded Image of {{creation.name}}">
+        {% endif %}
+        </div>
+    </div>
+        <p class="h6 morpho-guide-txt">Description: </p>
+        <p>{{creation.description}}</p>
+    {% endif %}
+    </div>
+</div>
+<div id="Foot" class="footer mx-4 mr-5">
+{% if pile %}
+<p class="morpho-sameline h4">Show Related Works</p>
+    <a class="float-right morpho-link"  id="ShowRelated" data-toggle="collapse" href="#Related" 
+    role="button" aria-expanded="false" aria-controls="collapseExample" onclick="rotateOnClick('ShowRelated')">
+        {% bs_icon 'caret-down-fill' %}
+      </a>
+    <hr style="border-top: 2px solid #6B829B;"/>
+    <div class="collapse container-fluid no-padding" id="Related">
+            <div id="my-row" class="row">
+                <div class="col-6 border-right border-dark">
+                    <div class="tab"> 
+                    <button class="tablinks" onclick="openCity(event, 'Ideas')" id="defaultOpen">Ideas</button>
+                    <button class="tablinks" onclick="openCity(event, 'Themes')">Themes</button>
+                    <button class="tablinks" onclick="openCity(event, 'Chapters')">Chapters</button>
+                    <button class="tablinks" onclick="openCity(event, 'Characters')">Characters</button>
+                    <button class="tablinks" onclick="openCity(event, 'Poems')">Poems</button>
+                    <button class="tablinks" onclick="openCity(event, 'Books')">Books</button>
+                    <button class="tablinks" onclick="openCity(event, 'Series')">Series</button>
+                    <button class="tablinks" onclick="openCity(event, 'Anthologies')">Anthologies</button>
+                    <button class="tablinks" onclick="openCity(event, 'Media')">Media</button>
+                    </div>
+                </div>
+                <div class="col-6 border-left border-dark">
+                    <div> 
+                    <div id="Ideas" class="tabcontent">
+                        {% for i in pile.ideas_lst %}
+                        <a href="{% url 'ViewCreation' type='Idea' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+                      
+                      <div id="Themes" class="tabcontent">
+                        {% for i in pile.themes_lst %}
+                        <a href="{% url 'ViewCreation' type='Theme' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+                      
+                      <div id="Chapters" class="tabcontent">
+                        {% for i in pile.chapters_lst %}
+                        <a href="{% url 'ViewCreation' type='Chapter' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+
+                      <div id="Characters" class="tabcontent">
+                        {% for i in pile.characters_lst %}
+                        <a href="{% url 'ViewCreation' type='Character' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+
+                      <div id="Poems" class="tabcontent">
+                        {% for i in pile.poems_lst %}
+                        <a href="{% url 'ViewCreation' type='Poem' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+
+                      <div id="Books" class="tabcontent">
+                        {% for i in pile.books_lst %}
+                        <a href="{% url 'ViewCreation' type='Books' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+
+                      <div id="Series" class="tabcontent">
+                        {% for i in pile.series_lst %}
+                        <a href="{% url 'ViewCreation' type='Series' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+
+                      <div id="Anthologies" class="tabcontent">
+                        {% for i in pile.anthologies_lst %}
+                        <a href="{% url 'ViewCreation' type='Anthology' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+
+                      <div id="Media" class="tabcontent">
+                        {% for i in pile.media_lst %}
+                        <a href="{% url 'ViewCreation' type='Media' id=i.id%}" class="morpho-link">
+                            <p class="h3"> {{i.name}}</p>
+                            <p><small> <span class="morpho-guide-txt">Updated: </span> {{i.last_modified}}</small></p> 
+                            <hr style="border-top: 2px solid #6B829B;"/></a>
+                        {% empty %}
+                        <p class="display-4">Nothing Yet!</p>
+                        {% endfor %}
+                      </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+{% else %}
+<p class="morpho-sameline h4">No Related works yet!</p>
+<a class="float-right morpho-link"  data-toggle="collapse" 
+role="button" aria-expanded="false" aria-controls="collapseExample">
+  </a>
+<hr style="border-top: 2px solid #6B829B;"/>
+{% endif %}
+</div>
+
+{% endblock %}
